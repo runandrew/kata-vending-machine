@@ -159,12 +159,29 @@ describe('Vending Machine Class', () => {
 
   describe('selectProduct method', () => {
     let aVendingMachine;
+    let oldDispenseProduct;
     beforeEach(() => {
       aVendingMachine = new VendingMachine();
+
+      oldDispenseProduct = VendingMachine.dispenseProduct;
+      VendingMachine.dispenseProduct = spy(VendingMachine.dispenseProduct);
+    });
+
+    afterEach(() => {
+      VendingMachine.dispenseProduct = oldDispenseProduct;
     });
 
     it('is a function', () => {
       expect(typeof aVendingMachine.selectProduct).to.equal('function');
+    });
+
+    it('dispenses a product when selected and has enough money', () => {
+      aVendingMachine.insertCoin(coinSpecTests.quarter)
+        .insertCoin(coinSpecTests.quarter);
+      aVendingMachine.selectProduct('chips');
+      
+      expect(VendingMachine.dispenseProduct.calledOnce).to.be.true;
+      expect(VendingMachine.dispenseProduct.calledWith('chips')).to.be.true;
     });
   });
 });

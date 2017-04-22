@@ -38,6 +38,7 @@ class VendingMachine {
     } else {
       VendingMachine.returnCoin();
     }
+    return this;
   }
 
   checkDisplay () {
@@ -45,7 +46,7 @@ class VendingMachine {
   }
 
   selectProduct () {
-
+    VendingMachine.dispenseProduct('chips');
   }
 
   static validateCoin ({weight, diameter}) {
