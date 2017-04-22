@@ -59,6 +59,5 @@ class VendingMachine {
 }
 
 module.exports = {
-  VendingMachine,
-  coinSpec
+  VendingMachine
 };
