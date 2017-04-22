@@ -96,9 +96,17 @@ describe('Vending Machine Class', () => {
   });
 
   describe('checkDisplay method', () => {
+    let aVendingMachine;
+    beforeEach(() => {
+      aVendingMachine = new VendingMachine();
+    });
+
     it('is a function', () => {
-      let aVendingMachine = new VendingMachine();
       expect(typeof aVendingMachine.checkDisplay).to.equal('function');
+    });
+
+    it('initially displays INSERT COIN', () => {
+      expect(aVendingMachine.checkDisplay()).to.equal('INSERT COIN');
     });
   });
 });
