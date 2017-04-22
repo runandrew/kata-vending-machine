@@ -24,6 +24,10 @@ describe('Vending Machine Class', () => {
     it('returns 10 for a dime', () => {
       expect(VendingMachine.validateCoin(coinSpec.dime)).to.equal(10);
     });
+
+    it('returns 25 for a quarter', () => {
+      expect(VendingMachine.validateCoin(coinSpec.quarter)).to.equal(25);
+    });
   });
 });
 

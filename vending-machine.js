@@ -22,7 +22,7 @@ class VendingMachine {
     } else if (weight === coinSpec.dime.weight && diameter === coinSpec.dime.diameter) {
       return 10;
     }
-    return 1;
+    return 25;
   }
 }
 
