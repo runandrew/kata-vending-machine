@@ -2,7 +2,7 @@
 
 class VendingMachine {
   static validateCoin () {
-
+    return 1;
   }
 }
 

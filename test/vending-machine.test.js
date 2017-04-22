@@ -12,6 +12,11 @@ describe('Vending Machine Class', () => {
     it('is a function', () => {
       expect(typeof VendingMachine.validateCoin).to.equal('function');
     });
+
+    it('returns a number', () => {
+      expect(typeof VendingMachine.validateCoin()).to.equal('number');
+    });
+
   });
 });
 
