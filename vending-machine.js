@@ -23,8 +23,8 @@ class VendingMachine {
     this.currentAmount = 0;
   }
 
-  insertCoin () {
-    this.currentAmount = 5;
+  insertCoin (insertedCoin) {
+    this.currentAmount += VendingMachine.validateCoin(insertedCoin); 
   }
 
   static validateCoin ({weight, diameter}) {

@@ -76,6 +76,8 @@ describe('Vending Machine Class', () => {
       let aVendingMachine = new VendingMachine();
       aVendingMachine.insertCoin(coinSpecTests.nickel);
       expect(aVendingMachine.currentAmount).to.equal(5);
+      aVendingMachine.insertCoin(coinSpecTests.dime);
+      expect(aVendingMachine.currentAmount).to.equal(15);
     });
   });
 });
