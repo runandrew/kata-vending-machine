@@ -16,8 +16,11 @@ const coinSpec = {
 };
 
 class VendingMachine {
-  static validateCoin () {
-    return 5;
+  static validateCoin ({weight, diameter}) {
+    if (weight === coinSpec.nickel.weight && diameter === coinSpec.nickel.diameter) {
+      return 5;
+    }
+    return 10;
   }
 }
 

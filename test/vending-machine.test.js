@@ -14,11 +14,15 @@ describe('Vending Machine Class', () => {
     });
 
     it('returns a number', () => {
-      expect(typeof VendingMachine.validateCoin()).to.equal('number');
+      expect(typeof VendingMachine.validateCoin(coinSpec.nickel)).to.equal('number');
     });
 
     it('returns 5 for a nickel', () => {
       expect(VendingMachine.validateCoin(coinSpec.nickel)).to.equal(5);
+    });
+
+    it('returns 10 for a dime', () => {
+      expect(VendingMachine.validateCoin(coinSpec.dime)).to.equal(10);
     });
   });
 });
