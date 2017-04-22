@@ -51,5 +51,12 @@ describe('Vending Machine Class', () => {
       expect(VendingMachine.validateCoin({ diameter: 7, weight: 7 })).to.equal(0);
     });
   });
+
+  describe('insertCoin method', () => {
+    it('is a function', () => {
+      let aVendingMachine = new VendingMachine();
+      expect(typeof aVendingMachine.insertCoin).to.equal('function');
+    });
+  });
 });
 

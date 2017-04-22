@@ -23,6 +23,10 @@ class VendingMachine {
     this.currentAmount = 0;
   }
 
+  insertCoin () {
+
+  }
+
   static validateCoin ({weight, diameter}) {
     for (let coin in coinSpec) {
       if (weight === coinSpec[coin].weight && diameter === coinSpec[coin].diameter) {
