@@ -3,6 +3,11 @@
 const { expect } = require('chai');
 const { VendingMachine, coinSpec } = require('../vending-machine');
 
+const penny = {
+  diameter: 19.05, // mm
+  weight: 2.500 // g
+};
+
 describe('Vending Machine Class', () => {
   it('is a function', () => {
     expect(typeof VendingMachine).to.equal('function');
@@ -30,7 +35,7 @@ describe('Vending Machine Class', () => {
     });
 
     it('returns 0 for an invalid coin', () => {
-      expect(VendingMachine.validateCoin(coinSpec.penny)).to.equal(0);
+      expect(VendingMachine.validateCoin(penny)).to.equal(0);
       expect(VendingMachine.validateCoin({ diameter: 7, weight: 7 })).to.equal(0);
     });
   });
