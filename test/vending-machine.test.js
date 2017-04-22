@@ -79,13 +79,16 @@ describe('Vending Machine Class', () => {
   });
 
   describe('insertCoin method', () => {
+    let aVendingMachine;
+    beforeEach(() => {
+      aVendingMachine = new VendingMachine();
+    });
+
     it('is a function', () => {
-      let aVendingMachine = new VendingMachine();
       expect(typeof aVendingMachine.insertCoin).to.equal('function');
     });
 
     it('updates the currentAmount after insertCoin', () => {
-      let aVendingMachine = new VendingMachine();
       aVendingMachine.insertCoin(coinSpecTests.nickel);
       expect(aVendingMachine.currentAmount).to.equal(5);
       aVendingMachine.insertCoin(coinSpecTests.dime);
@@ -95,7 +98,6 @@ describe('Vending Machine Class', () => {
     });
 
     it('updates the displayText after insertCoin', () => {
-      let aVendingMachine = new VendingMachine();
       aVendingMachine.insertCoin(coinSpecTests.nickel);
       expect(aVendingMachine.displayText).to.equal('$0.05');
     });
