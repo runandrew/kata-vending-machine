@@ -45,6 +45,10 @@ describe('Vending Machine Class', () => {
     it('has a displayText property', () => {
       expect(typeof aVendingMachine.displayText).to.equal('string');
     });
+
+    it('displayText starts at "INSERT COIN"', () => {
+      expect(aVendingMachine.displayText).to.equal('INSERT COIN');
+    });
   });
 
   describe('validateCoin static method', () => {

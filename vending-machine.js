@@ -21,7 +21,7 @@ const coinSpec = {
 class VendingMachine {
   constructor () {
     this.currentAmount = 0;
-    this.displayText = '';
+    this.displayText = 'INSERT COIN';
   }
 
   insertCoin (insertedCoin) {
