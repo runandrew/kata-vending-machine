@@ -44,6 +44,10 @@ class VendingMachine {
     return this.displayText;
   }
 
+  selectProduct () {
+
+  }
+
   static validateCoin ({weight, diameter}) {
     for (let coin in coinSpec) {
       if (weight === coinSpec[coin].weight && diameter === coinSpec[coin].diameter) {
@@ -60,11 +64,11 @@ class VendingMachine {
   }
 
   static returnCoin () {
-
+    // will physically return the coin
   }
 
   static dispenseProduct () {
-
+    // will physically dispense the product
   }
 }
 

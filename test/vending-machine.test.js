@@ -156,5 +156,16 @@ describe('Vending Machine Class', () => {
       expect(aVendingMachine.checkDisplay()).to.equal('INSERT COIN');
     });
   });
+
+  describe('selectProduct method', () => {
+    let aVendingMachine;
+    beforeEach(() => {
+      aVendingMachine = new VendingMachine();
+    });
+
+    it('is a function', () => {
+      expect(typeof aVendingMachine.selectProduct).to.equal('function');
+    });
+  });
 });
 
