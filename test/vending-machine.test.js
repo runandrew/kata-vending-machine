@@ -197,6 +197,7 @@ describe('Vending Machine Class', () => {
 
       expect(aVendingMachine.checkDisplay()).to.equal('THANK YOU');
       expect(aVendingMachine.checkDisplay()).to.equal('INSERT COIN');
+      expect(aVendingMachine.checkDisplay()).to.equal('INSERT COIN');
     });
 
     it('after dispensing a product, it should reset the currentAmount', () => {
@@ -211,6 +212,14 @@ describe('Vending Machine Class', () => {
       expect(aVendingMachine.currentAmount).to.equal(50);
       expect(aVendingMachine.checkDisplay()).to.equal('PRICE: $1.00');
       expect(aVendingMachine.checkDisplay()).to.equal('$0.50');
+    });
+
+    it('if there is not enough money, and there are no coins, it should display INSERT COIN', () => {
+      aVendingMachine.currentAmount = 0;
+      aVendingMachine.selectProduct('cola');
+      expect(aVendingMachine.checkDisplay()).to.equal('PRICE: $1.00');
+      expect(aVendingMachine.checkDisplay()).to.equal('INSERT COIN');
+      expect(aVendingMachine.checkDisplay()).to.equal('INSERT COIN');
     });
   });
 });
