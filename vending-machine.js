@@ -22,7 +22,7 @@ const products = {
   cola: 100,
   chips: 50,
   candy: 65
-};
+}; // cents
 
 class VendingMachine {
   constructor () {
@@ -55,8 +55,15 @@ class VendingMachine {
     } else {
       VendingMachine.dispenseProduct(product);
       this.displayText = 'THANK YOU';
+
+      const remainingAmount = this.currentAmount - productPrice;
+      if (remainingAmount) VendingMachine.returnCoin();
       this.currentAmount = 0;
     }
+  }
+
+  makeChange () {
+
   }
 
   static validateCoin ({weight, diameter}) {

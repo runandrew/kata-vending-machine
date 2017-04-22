@@ -222,5 +222,17 @@ describe('Vending Machine Class', () => {
       expect(aVendingMachine.checkDisplay()).to.equal('INSERT COIN');
     });
   });
+
+  describe('makeChange method', () => {
+    let aVendingMachine;
+
+    beforeEach(() => {
+      aVendingMachine = new VendingMachine();
+    });
+
+    it('is a function', () => {
+      expect(typeof aVendingMachine.makeChange).to.equal('function');
+    });
+  });
 });
 
