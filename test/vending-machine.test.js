@@ -90,6 +90,8 @@ describe('Vending Machine Class', () => {
       expect(aVendingMachine.currentAmount).to.equal(5);
       aVendingMachine.insertCoin(coinSpecTests.dime);
       expect(aVendingMachine.currentAmount).to.equal(15);
+      aVendingMachine.insertCoin(coinSpecTests.penny);
+      expect(aVendingMachine.currentAmount).to.equal(15);
     });
   });
 });
