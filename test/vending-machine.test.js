@@ -167,9 +167,6 @@ describe('Vending Machine Class', () => {
       VendingMachine.dispenseProduct = spy(VendingMachine.dispenseProduct);
 
       aVendingMachine.insertCoin(coinSpecTests.quarter)
-        .insertCoin(coinSpecTests.quarter)
-        .insertCoin(coinSpecTests.quarter)
-        .insertCoin(coinSpecTests.quarter)
         .insertCoin(coinSpecTests.quarter);
     });
 
@@ -185,6 +182,10 @@ describe('Vending Machine Class', () => {
       aVendingMachine.selectProduct('chips');
       expect(VendingMachine.dispenseProduct.calledOnce).to.be.true;
       expect(VendingMachine.dispenseProduct.calledWith('chips')).to.be.true;
+
+      aVendingMachine.insertCoin(coinSpecTests.quarter)
+        .insertCoin(coinSpecTests.quarter)
+        .insertCoin(coinSpecTests.quarter);
 
       aVendingMachine.selectProduct('candy');
       expect(VendingMachine.dispenseProduct.calledTwice).to.be.true;
@@ -203,6 +204,7 @@ describe('Vending Machine Class', () => {
 
       expect(aVendingMachine.currentAmount).to.equal(0);
     });
+
   });
 });
 
