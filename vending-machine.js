@@ -19,8 +19,10 @@ class VendingMachine {
   static validateCoin ({weight, diameter}) {
     if (weight === coinSpec.nickel.weight && diameter === coinSpec.nickel.diameter) {
       return 5;
+    } else if (weight === coinSpec.dime.weight && diameter === coinSpec.dime.diameter) {
+      return 10;
     }
-    return 10;
+    return 1;
   }
 }
 
