@@ -44,6 +44,7 @@ class VendingMachine {
   checkDisplay () {
     let outputText = this.displayText;
     if (outputText === 'THANK YOU') this.displayText = 'INSERT COIN';
+    else if (outputText.indexOf('PRICE') !== -1) this.displayText = VendingMachine.centToDollarStr(this.currentAmount);
     return outputText;
   }
 
