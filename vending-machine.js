@@ -42,7 +42,9 @@ class VendingMachine {
   }
 
   checkDisplay () {
-    return this.displayText;
+    let outputText = this.displayText;
+    if (outputText === 'THANK YOU') this.displayText = 'INSERT COIN';
+    return outputText;
   }
 
   selectProduct () {

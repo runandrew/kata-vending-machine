@@ -185,10 +185,11 @@ describe('Vending Machine Class', () => {
       expect(VendingMachine.dispenseProduct.calledWith('chips')).to.be.true;
     });
 
-    it('after dispensing a product, the display will show "THANK YOU"', () => {
+    it('after dispensing a product, the display will show "THANK YOU", and then INSERT COIN', () => {
       aVendingMachine.selectProduct('chips');
 
       expect(aVendingMachine.checkDisplay()).to.equal('THANK YOU');
+      expect(aVendingMachine.checkDisplay()).to.equal('INSERT COIN');
     });
 
     it('after dispensing a product, it should reset the currentAmount', () => {
