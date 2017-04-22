@@ -47,6 +47,10 @@ class VendingMachine {
     const centsRemainder = cents % 100;
     return `$${dollars}.${centsRemainder > 9 ? centsRemainder : `0${centsRemainder}`}`;
   }
+
+  static returnCoin () {
+
+  }
 }
 
 module.exports = {

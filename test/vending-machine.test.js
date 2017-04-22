@@ -91,6 +91,12 @@ describe('Vending Machine Class', () => {
     });
   });
 
+  describe('returnCoin static method', () => {
+    it('is a function', () => {
+      expect(typeof VendingMachine.returnCoin).to.equal('function');
+    });
+  });
+
   describe('insertCoin method', () => {
     let aVendingMachine;
     beforeEach(() => {
