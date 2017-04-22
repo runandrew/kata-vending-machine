@@ -18,6 +18,12 @@ const coinSpec = {
   }
 };
 
+const products = {
+  cola: 100,
+  chips: 50,
+  candy: 65
+};
+
 class VendingMachine {
   constructor () {
     this.currentAmount = 0;
@@ -54,6 +60,10 @@ class VendingMachine {
   }
 
   static returnCoin () {
+
+  }
+
+  static dispenseProduct () {
 
   }
 }

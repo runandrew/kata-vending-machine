@@ -109,6 +109,12 @@ describe('Vending Machine Class', () => {
     });
   });
 
+  describe('dispenseProduct static method', () => {
+    it('is a function', () => {
+      expect(typeof VendingMachine.dispenseProduct).to.equal('function');
+    });
+  });
+
   describe('insertCoin method', () => {
     let aVendingMachine;
     beforeEach(() => {
