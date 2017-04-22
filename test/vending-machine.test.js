@@ -109,6 +109,12 @@ describe('Vending Machine Class', () => {
     });
   });
 
+  describe('dispenseProduct static method', () => {
+    it('is a function', () => {
+      expect(typeof VendingMachine.dispenseProduct).to.equal('function');
+    });
+  });
+
   describe('insertCoin method', () => {
     let aVendingMachine;
     beforeEach(() => {
@@ -147,6 +153,72 @@ describe('Vending Machine Class', () => {
     });
 
     it('initially displays INSERT COIN', () => {
+      expect(aVendingMachine.checkDisplay()).to.equal('INSERT COIN');
+    });
+  });
+
+  describe('selectProduct method', () => {
+    let aVendingMachine;
+    let oldDispenseProduct;
+    beforeEach(() => {
+      aVendingMachine = new VendingMachine();
+
+      oldDispenseProduct = VendingMachine.dispenseProduct;
+      VendingMachine.dispenseProduct = spy(VendingMachine.dispenseProduct);
+
+      aVendingMachine.insertCoin(coinSpecTests.quarter)
+        .insertCoin(coinSpecTests.quarter);
+    });
+
+    afterEach(() => {
+      VendingMachine.dispenseProduct = oldDispenseProduct;
+    });
+
+    it('is a function', () => {
+      expect(typeof aVendingMachine.selectProduct).to.equal('function');
+    });
+
+    it('dispenses a product when selected and has enough money', () => {
+      aVendingMachine.selectProduct('chips');
+      expect(VendingMachine.dispenseProduct.calledOnce).to.be.true;
+      expect(VendingMachine.dispenseProduct.calledWith('chips')).to.be.true;
+
+      aVendingMachine.insertCoin(coinSpecTests.quarter)
+        .insertCoin(coinSpecTests.quarter)
+        .insertCoin(coinSpecTests.quarter);
+
+      aVendingMachine.selectProduct('candy');
+      expect(VendingMachine.dispenseProduct.calledTwice).to.be.true;
+      expect(VendingMachine.dispenseProduct.calledWith('candy')).to.be.true;
+    });
+
+    it('after dispensing a product, the display will show "THANK YOU", and then INSERT COIN', () => {
+      aVendingMachine.selectProduct('chips');
+
+      expect(aVendingMachine.checkDisplay()).to.equal('THANK YOU');
+      expect(aVendingMachine.checkDisplay()).to.equal('INSERT COIN');
+      expect(aVendingMachine.checkDisplay()).to.equal('INSERT COIN');
+    });
+
+    it('after dispensing a product, it should reset the currentAmount', () => {
+      aVendingMachine.selectProduct('chips');
+
+      expect(aVendingMachine.currentAmount).to.equal(0);
+    });
+
+    it('if there is not enough money, it should not dispense and display PRICE and then the currentAmount', () => {
+      aVendingMachine.selectProduct('cola');
+      expect(VendingMachine.dispenseProduct.callCount).to.equal(0);
+      expect(aVendingMachine.currentAmount).to.equal(50);
+      expect(aVendingMachine.checkDisplay()).to.equal('PRICE: $1.00');
+      expect(aVendingMachine.checkDisplay()).to.equal('$0.50');
+    });
+
+    it('if there is not enough money, and there are no coins, it should display INSERT COIN', () => {
+      aVendingMachine.currentAmount = 0;
+      aVendingMachine.selectProduct('cola');
+      expect(aVendingMachine.checkDisplay()).to.equal('PRICE: $1.00');
+      expect(aVendingMachine.checkDisplay()).to.equal('INSERT COIN');
       expect(aVendingMachine.checkDisplay()).to.equal('INSERT COIN');
     });
   });
