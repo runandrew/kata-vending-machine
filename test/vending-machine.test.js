@@ -183,6 +183,14 @@ describe('Vending Machine Class', () => {
       expect(VendingMachine.dispenseProduct.calledOnce).to.be.true;
       expect(VendingMachine.dispenseProduct.calledWith('chips')).to.be.true;
     });
+
+    it('after dispensing a product, the display will show "THANK YOU"', () => {
+      aVendingMachine.insertCoin(coinSpecTests.quarter)
+        .insertCoin(coinSpecTests.quarter);
+      aVendingMachine.selectProduct('chips');
+
+      expect(aVendingMachine.checkDisplay()).to.equal('THANK YOU');
+    });
   });
 });
 

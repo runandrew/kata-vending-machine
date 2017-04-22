@@ -47,6 +47,7 @@ class VendingMachine {
 
   selectProduct () {
     VendingMachine.dispenseProduct('chips');
+    this.displayText = 'THANK YOU';
   }
 
   static validateCoin ({weight, diameter}) {
@@ -68,7 +69,7 @@ class VendingMachine {
     // will physically return the coin
   }
 
-  static dispenseProduct () {
+  static dispenseProduct (product) {
     // will physically dispense the product
   }
 }
