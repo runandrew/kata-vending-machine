@@ -94,5 +94,12 @@ describe('Vending Machine Class', () => {
       expect(aVendingMachine.currentAmount).to.equal(15);
     });
   });
+
+  describe('checkDisplay method', () => {
+    it('is a function', () => {
+      let aVendingMachine = new VendingMachine();
+      expect(typeof aVendingMachine.checkDisplay).to.equal('function');
+    });
+  });
 });
 
