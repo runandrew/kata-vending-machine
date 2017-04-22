@@ -28,18 +28,21 @@ describe('Vending Machine Class', () => {
   });
 
   describe('constructor function', () => {
+    let aVendingMachine;
+
+    beforeEach(() => {
+      aVendingMachine = new VendingMachine();
+    });
+
     it('has a currentAmount property that is a number', () => {
-      let aVendingMachine = new VendingMachine();
       expect(typeof aVendingMachine.currentAmount).to.equal('number');
     });
 
     it('currentAmount starts at 0', () => {
-      let aVendingMachine = new VendingMachine();
       expect(aVendingMachine.currentAmount).to.equal(0);
     });
 
     it('has a displayText property', () => {
-      let aVendingMachine = new VendingMachine();
       expect(typeof aVendingMachine.displayText).to.equal('string');
     });
   });
