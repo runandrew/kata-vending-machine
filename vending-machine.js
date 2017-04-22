@@ -21,10 +21,11 @@ const coinSpec = {
 class VendingMachine {
   constructor () {
     this.currentAmount = 0;
+    this.displayText = '';
   }
 
   insertCoin (insertedCoin) {
-    this.currentAmount += VendingMachine.validateCoin(insertedCoin); 
+    this.currentAmount += VendingMachine.validateCoin(insertedCoin);
   }
 
   static validateCoin ({weight, diameter}) {

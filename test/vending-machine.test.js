@@ -37,6 +37,11 @@ describe('Vending Machine Class', () => {
       let aVendingMachine = new VendingMachine();
       expect(aVendingMachine.currentAmount).to.equal(0);
     });
+
+    it('has a displayText property', () => {
+      let aVendingMachine = new VendingMachine();
+      expect(typeof aVendingMachine.displayText).to.equal('string');
+    });
   });
 
   describe('validateCoin static method', () => {
