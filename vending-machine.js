@@ -26,7 +26,7 @@ class VendingMachine {
 
   insertCoin (insertedCoin) {
     this.currentAmount += VendingMachine.validateCoin(insertedCoin);
-    this.displayText = '$0.05';
+    this.displayText = VendingMachine.centToDollarStr(this.currentAmount);
   }
 
   checkDisplay () {
@@ -45,7 +45,6 @@ class VendingMachine {
   static centToDollarStr (cents) {
     const dollars = Math.floor(cents / 100);
     const centsRemainder = cents % 100;
-    console.log(`$${dollars}.${centsRemainder > 9 ? centsRemainder : `0${centsRemainder}`}`);
     return `$${dollars}.${centsRemainder > 9 ? centsRemainder : `0${centsRemainder}`}`;
   }
 }
