@@ -1,6 +1,7 @@
 // Tests for Vending Machine
 
 const { expect } = require('chai');
+const { spy } = require('sinon');
 const { VendingMachine } = require('../vending-machine');
 
 const coinSpecTests = {
@@ -94,6 +95,17 @@ describe('Vending Machine Class', () => {
   describe('returnCoin static method', () => {
     it('is a function', () => {
       expect(typeof VendingMachine.returnCoin).to.equal('function');
+    });
+
+    it('is called when an invalid coin is inserted', () => {
+      const originalReturnCoin = VendingMachine.returnCoin; // Save original function so that it can be reset later
+      VendingMachine.returnCoin = spy(VendingMachine.returnCoin);
+      let aVendingMachine = new VendingMachine();
+      aVendingMachine.insertCoin(coinSpecTests.dime);
+      expect(VendingMachine.returnCoin.called).to.be.false;
+      aVendingMachine.insertCoin(coinSpecTests.penny);
+      expect(VendingMachine.returnCoin.calledOnce).to.be.true;
+      VendingMachine.returnCoin = originalReturnCoin; // Reset to original function
     });
   });
 

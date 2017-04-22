@@ -25,8 +25,13 @@ class VendingMachine {
   }
 
   insertCoin (insertedCoin) {
-    this.currentAmount += VendingMachine.validateCoin(insertedCoin);
-    this.displayText = VendingMachine.centToDollarStr(this.currentAmount);
+    const coinValue = VendingMachine.validateCoin(insertedCoin);
+    if (coinValue) {
+      this.currentAmount += VendingMachine.validateCoin(insertedCoin);
+      this.displayText = VendingMachine.centToDollarStr(this.currentAmount);
+    } else {
+      VendingMachine.returnCoin();
+    }
   }
 
   checkDisplay () {
