@@ -47,8 +47,8 @@ class VendingMachine {
     return outputText;
   }
 
-  selectProduct () {
-    VendingMachine.dispenseProduct('chips');
+  selectProduct (product) {
+    VendingMachine.dispenseProduct(product);
     this.displayText = 'THANK YOU';
     this.currentAmount = 0;
   }

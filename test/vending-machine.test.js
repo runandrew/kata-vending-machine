@@ -167,6 +167,9 @@ describe('Vending Machine Class', () => {
       VendingMachine.dispenseProduct = spy(VendingMachine.dispenseProduct);
 
       aVendingMachine.insertCoin(coinSpecTests.quarter)
+        .insertCoin(coinSpecTests.quarter)
+        .insertCoin(coinSpecTests.quarter)
+        .insertCoin(coinSpecTests.quarter)
         .insertCoin(coinSpecTests.quarter);
     });
 
@@ -180,9 +183,12 @@ describe('Vending Machine Class', () => {
 
     it('dispenses a product when selected and has enough money', () => {
       aVendingMachine.selectProduct('chips');
-      
       expect(VendingMachine.dispenseProduct.calledOnce).to.be.true;
       expect(VendingMachine.dispenseProduct.calledWith('chips')).to.be.true;
+
+      aVendingMachine.selectProduct('candy');
+      expect(VendingMachine.dispenseProduct.calledTwice).to.be.true;
+      expect(VendingMachine.dispenseProduct.calledWith('candy')).to.be.true;
     });
 
     it('after dispensing a product, the display will show "THANK YOU", and then INSERT COIN', () => {
