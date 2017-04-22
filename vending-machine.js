@@ -21,8 +21,10 @@ class VendingMachine {
       return 5;
     } else if (weight === coinSpec.dime.weight && diameter === coinSpec.dime.diameter) {
       return 10;
+    } else if (weight === coinSpec.quarter.weight && diameter === coinSpec.quarter.diameter) {
+      return 25;
     }
-    return 25;
+    return 1;
   }
 }
 
