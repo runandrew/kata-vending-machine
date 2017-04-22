@@ -85,6 +85,9 @@ describe('Vending Machine Class', () => {
 
     it('returns dollar string from cent input', () => {
       expect(VendingMachine.centToDollarStr(5)).to.equal('$0.05');
+      expect(VendingMachine.centToDollarStr(80)).to.equal('$0.80');
+      expect(VendingMachine.centToDollarStr(120)).to.equal('$1.20');
+      expect(VendingMachine.centToDollarStr(205)).to.equal('$2.05');
     });
   });
 

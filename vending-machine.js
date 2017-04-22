@@ -42,8 +42,11 @@ class VendingMachine {
     return 0;
   }
 
-  static centToDollarStr () {
-    return '$0.05';
+  static centToDollarStr (cents) {
+    const dollars = Math.floor(cents / 100);
+    const centsRemainder = cents % 100;
+    console.log(`$${dollars}.${centsRemainder > 9 ? centsRemainder : `0${centsRemainder}`}`);
+    return `$${dollars}.${centsRemainder > 9 ? centsRemainder : `0${centsRemainder}`}`;
   }
 }
 
