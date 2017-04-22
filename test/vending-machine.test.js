@@ -28,6 +28,10 @@ describe('Vending Machine Class', () => {
     it('returns 25 for a quarter', () => {
       expect(VendingMachine.validateCoin(coinSpec.quarter)).to.equal(25);
     });
+
+    it('returns 0 for an invalid coin', () => {
+      expect(VendingMachine.validateCoin(coinSpec.penny)).to.equal(0);
+    });
   });
 });
 

@@ -1,6 +1,10 @@
 // Vending Machine
 
 const coinSpec = {
+  penny: {
+    diameter: 19.05, // mm
+    weight: 2.500 // g
+  },
   nickel: {
     diameter: 21.21, // mm
     weight: 5.000 // g
@@ -23,8 +27,9 @@ class VendingMachine {
       return 10;
     } else if (weight === coinSpec.quarter.weight && diameter === coinSpec.quarter.diameter) {
       return 25;
+    } else {
+      return 0;
     }
-    return 1;
   }
 }
 
