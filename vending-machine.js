@@ -48,9 +48,14 @@ class VendingMachine {
   }
 
   selectProduct (product) {
-    VendingMachine.dispenseProduct(product);
-    this.displayText = 'THANK YOU';
-    this.currentAmount = 0;
+    const productPrice = products[product];
+    if (productPrice > this.currentAmount) {
+      this.displayText = `PRICE: ${VendingMachine.centToDollarStr(productPrice)}`;
+    } else {
+      VendingMachine.dispenseProduct(product);
+      this.displayText = 'THANK YOU';
+      this.currentAmount = 0;
+    }
   }
 
   static validateCoin ({weight, diameter}) {

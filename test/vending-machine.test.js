@@ -205,6 +205,12 @@ describe('Vending Machine Class', () => {
       expect(aVendingMachine.currentAmount).to.equal(0);
     });
 
+    it('if there is not enough money, it should not dispense and display PRICE', () => {
+      aVendingMachine.selectProduct('cola');
+      expect(VendingMachine.dispenseProduct.callCount).to.equal(0);
+      expect(aVendingMachine.currentAmount).to.equal(50);
+      expect(aVendingMachine.checkDisplay()).to.equal('PRICE: $1.00');
+    });
   });
 });
 
