@@ -29,7 +29,7 @@ class VendingMachine {
   }
 
   checkDisplay () {
-    return 'INSERT COIN';
+    return this.displayText;
   }
 
   static validateCoin ({weight, diameter}) {
