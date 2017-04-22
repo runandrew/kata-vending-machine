@@ -39,8 +39,11 @@ class VendingMachine {
         return coinSpec[coin].value;
       }
     }
-
     return 0;
+  }
+
+  static centToDollarStr () {
+
   }
 }
 

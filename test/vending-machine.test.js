@@ -78,6 +78,12 @@ describe('Vending Machine Class', () => {
     });
   });
 
+  describe('centToDollarStr static method', () => {
+    it('is a function', () => {
+      expect(typeof VendingMachine.centToDollarStr).to.equal('function');
+    });
+  });
+
   describe('insertCoin method', () => {
     let aVendingMachine;
     beforeEach(() => {
