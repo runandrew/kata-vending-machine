@@ -18,6 +18,11 @@ describe('Vending Machine Class', () => {
       let aVendingMachine = new VendingMachine();
       expect(typeof aVendingMachine.currentAmount).to.equal('number');
     });
+
+    it('currentAmount starts at 0', () => {
+      let aVendingMachine = new VendingMachine();
+      expect(aVendingMachine.currentAmount).to.equal(0);
+    });
   });
 
   describe('validateCoin static method', () => {
