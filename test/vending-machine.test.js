@@ -225,13 +225,25 @@ describe('Vending Machine Class', () => {
 
   describe('makeChange method', () => {
     let aVendingMachine;
+    let originalReturnCoin;
 
     beforeEach(() => {
+      originalReturnCoin = VendingMachine.returnCoin; // Save original function so that it can be reset later
+      VendingMachine.returnCoin = spy(VendingMachine.returnCoin);
       aVendingMachine = new VendingMachine();
+    });
+
+    afterEach(() => {
+      VendingMachine.returnCoin = originalReturnCoin; // Reset to original function
     });
 
     it('is a function', () => {
       expect(typeof aVendingMachine.makeChange).to.equal('function');
+    });
+
+    it('invokes returnCoin', () => {
+      aVendingMachine.makeChange();
+      expect(VendingMachine.returnCoin.calledOnce).to.be.true;
     });
   });
 });
