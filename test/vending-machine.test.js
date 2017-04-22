@@ -31,6 +31,7 @@ describe('Vending Machine Class', () => {
 
     it('returns 0 for an invalid coin', () => {
       expect(VendingMachine.validateCoin(coinSpec.penny)).to.equal(0);
+      expect(VendingMachine.validateCoin({ diameter: 7, weight: 7 })).to.equal(0);
     });
   });
 });
