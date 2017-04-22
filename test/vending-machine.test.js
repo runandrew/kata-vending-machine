@@ -93,6 +93,12 @@ describe('Vending Machine Class', () => {
       aVendingMachine.insertCoin(coinSpecTests.penny);
       expect(aVendingMachine.currentAmount).to.equal(15);
     });
+
+    it('updates the displayText after insertCoin', () => {
+      let aVendingMachine = new VendingMachine();
+      aVendingMachine.insertCoin(coinSpecTests.nickel);
+      expect(aVendingMachine.displayText).to.equal('$0.05');
+    });
   });
 
   describe('checkDisplay method', () => {

@@ -26,6 +26,7 @@ class VendingMachine {
 
   insertCoin (insertedCoin) {
     this.currentAmount += VendingMachine.validateCoin(insertedCoin);
+    this.displayText = '$0.05';
   }
 
   checkDisplay () {
