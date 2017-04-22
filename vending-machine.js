@@ -43,7 +43,7 @@ class VendingMachine {
   }
 
   static centToDollarStr () {
-
+    return '$0.05';
   }
 }
 

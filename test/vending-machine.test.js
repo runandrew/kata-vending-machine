@@ -82,6 +82,10 @@ describe('Vending Machine Class', () => {
     it('is a function', () => {
       expect(typeof VendingMachine.centToDollarStr).to.equal('function');
     });
+
+    it('returns dollar string from cent input', () => {
+      expect(VendingMachine.centToDollarStr(5)).to.equal('$0.05');
+    });
   });
 
   describe('insertCoin method', () => {
