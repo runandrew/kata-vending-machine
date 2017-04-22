@@ -71,6 +71,12 @@ describe('Vending Machine Class', () => {
       let aVendingMachine = new VendingMachine();
       expect(typeof aVendingMachine.insertCoin).to.equal('function');
     });
+
+    it('updates the currentAmount after insertCoin', () => {
+      let aVendingMachine = new VendingMachine();
+      aVendingMachine.insertCoin(coinSpecTests.nickel);
+      expect(aVendingMachine.currentAmount).to.equal(5);
+    });
   });
 });
 
