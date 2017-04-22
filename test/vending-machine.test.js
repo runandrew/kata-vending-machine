@@ -165,6 +165,9 @@ describe('Vending Machine Class', () => {
 
       oldDispenseProduct = VendingMachine.dispenseProduct;
       VendingMachine.dispenseProduct = spy(VendingMachine.dispenseProduct);
+
+      aVendingMachine.insertCoin(coinSpecTests.quarter)
+        .insertCoin(coinSpecTests.quarter);
     });
 
     afterEach(() => {
@@ -176,8 +179,6 @@ describe('Vending Machine Class', () => {
     });
 
     it('dispenses a product when selected and has enough money', () => {
-      aVendingMachine.insertCoin(coinSpecTests.quarter)
-        .insertCoin(coinSpecTests.quarter);
       aVendingMachine.selectProduct('chips');
       
       expect(VendingMachine.dispenseProduct.calledOnce).to.be.true;
@@ -185,11 +186,15 @@ describe('Vending Machine Class', () => {
     });
 
     it('after dispensing a product, the display will show "THANK YOU"', () => {
-      aVendingMachine.insertCoin(coinSpecTests.quarter)
-        .insertCoin(coinSpecTests.quarter);
       aVendingMachine.selectProduct('chips');
 
       expect(aVendingMachine.checkDisplay()).to.equal('THANK YOU');
+    });
+
+    it('after dispensing a product, it should reset the currentAmount', () => {
+      aVendingMachine.selectProduct('chips');
+
+      expect(aVendingMachine.currentAmount).to.equal(0);
     });
   });
 });

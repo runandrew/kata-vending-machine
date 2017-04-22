@@ -48,6 +48,7 @@ class VendingMachine {
   selectProduct () {
     VendingMachine.dispenseProduct('chips');
     this.displayText = 'THANK YOU';
+    this.currentAmount = 0;
   }
 
   static validateCoin ({weight, diameter}) {
