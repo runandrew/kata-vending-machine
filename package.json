@@ -1,0 +1,31 @@
+{
+  "name": "kata-vending-machine",
+  "version": "1.0.0",
+  "description": "An implementation of a vending machine.",
+  "main": "vending-machine.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "mocha test",
+    "test-watch": "mocha test --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/runandrew/kata-vending-machine.git"
+  },
+  "keywords": [
+    "vending",
+    "machine"
+  ],
+  "author": "Andrew Garcia",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/runandrew/kata-vending-machine/issues"
+  },
+  "homepage": "https://github.com/runandrew/kata-vending-machine#readme",
+  "dependencies": {
+    "chai": "^3.5.0",
+    "mocha": "^3.2.0"
+  }
+}
