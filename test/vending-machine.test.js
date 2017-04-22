@@ -13,6 +13,13 @@ describe('Vending Machine Class', () => {
     expect(typeof VendingMachine).to.equal('function');
   });
 
+  describe('constructor function', () => {
+    it('has a currentAmount property that is a number', () => {
+      let aVendingMachine = new VendingMachine();
+      expect(typeof aVendingMachine.currentAmount).to.equal('number');
+    });
+  });
+
   describe('validateCoin static method', () => {
     it('is a function', () => {
       expect(typeof VendingMachine.validateCoin).to.equal('function');

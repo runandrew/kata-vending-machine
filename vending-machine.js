@@ -19,6 +19,10 @@ const coinSpec = {
 };
 
 class VendingMachine {
+  constructor () {
+    this.currentAmount = 0;
+  }
+
   static validateCoin ({weight, diameter}) {
     for (let coin in coinSpec) {
       if (weight === coinSpec[coin].weight && diameter === coinSpec[coin].diameter) {
