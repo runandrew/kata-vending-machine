@@ -1,7 +1,7 @@
 // Tests for Vending Machine
 
 const { expect } = require('chai');
-const { VendingMachine } = require('../vending-machine');
+const { VendingMachine, coinSpec } = require('../vending-machine');
 
 describe('Vending Machine Class', () => {
   it('is a function', () => {
@@ -17,6 +17,9 @@ describe('Vending Machine Class', () => {
       expect(typeof VendingMachine.validateCoin()).to.equal('number');
     });
 
+    it('returns 5 for a nickel', () => {
+      expect(VendingMachine.validateCoin(coinSpec.nickel)).to.equal(5);
+    });
   });
 });
 
