@@ -74,6 +74,7 @@ class VendingMachine {
     const coinsToMakeRemainder = this.makeChange(this.currentAmount);
     this.updateBank('subtract', coinsToMakeRemainder);
     VendingMachine.returnCoin(coinsToMakeRemainder);
+    this.displayText = 'INSERT COIN';
   }
 
   makeChange (requestedChange) {

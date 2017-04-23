@@ -384,6 +384,11 @@ describe('Vending Machine Class', () => {
       assert.calledWithMatch(VendingMachine.returnCoin, [10]);
       expect(aVendingMachine.bank.toJS()).to.eql({ 25: 1, 10: 0, 5: 3 });
     });
+
+    it('displays "INSERT COIN" after returning the coins', () => {
+      aVendingMachine.selectReturnCoin();
+      expect(aVendingMachine.checkDisplay()).to.equal('INSERT COIN');
+    });
   });
 });
 
