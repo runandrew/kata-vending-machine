@@ -160,11 +160,16 @@ describe('Vending Machine Class', () => {
   describe('selectProduct method', () => {
     let aVendingMachine;
     let oldDispenseProduct;
+    let originalReturnCoin;
+    
     beforeEach(() => {
       aVendingMachine = new VendingMachine();
 
       oldDispenseProduct = VendingMachine.dispenseProduct;
       VendingMachine.dispenseProduct = spy(VendingMachine.dispenseProduct);
+
+      originalReturnCoin = VendingMachine.returnCoin;
+      VendingMachine.returnCoin = spy(VendingMachine.returnCoin);
 
       aVendingMachine.insertCoin(coinSpecTests.quarter)
         .insertCoin(coinSpecTests.quarter);
@@ -172,6 +177,7 @@ describe('Vending Machine Class', () => {
 
     afterEach(() => {
       VendingMachine.dispenseProduct = oldDispenseProduct;
+      VendingMachine.returnCoin = originalReturnCoin;
     });
 
     it('is a function', () => {
@@ -221,40 +227,32 @@ describe('Vending Machine Class', () => {
       expect(aVendingMachine.checkDisplay()).to.equal('INSERT COIN');
       expect(aVendingMachine.checkDisplay()).to.equal('INSERT COIN');
     });
+    
+    it('invokes returnCoin when the product price is less than current amount', () => {
+      aVendingMachine.insertCoin(coinSpecTests.quarter);
+      aVendingMachine.selectProduct('chips');
+      expect(VendingMachine.returnCoin.calledOnce).to.be.true;
+    });
+
+    it('invokes returnCoin with an array of coins, which are the least number of coins to make the change', () => {
+      aVendingMachine.insertCoin(coinSpecTests.quarter)
+        .insertCoin(coinSpecTests.quarter);
+
+      aVendingMachine.selectProduct('chips');
+
+      assert.calledWithMatch(VendingMachine.returnCoin, [25, 25]);
+    });
   });
 
   describe('makeChange method', () => {
     let aVendingMachine;
-    let originalReturnCoin;
 
     beforeEach(() => {
-      originalReturnCoin = VendingMachine.returnCoin; // Save original function so that it can be reset later
-      VendingMachine.returnCoin = spy(VendingMachine.returnCoin);
       aVendingMachine = new VendingMachine();
-    });
-
-    afterEach(() => {
-      VendingMachine.returnCoin = originalReturnCoin; // Reset to original function
     });
 
     it('is a function', () => {
       expect(typeof aVendingMachine.makeChange).to.equal('function');
-    });
-
-    it('invokes returnCoin', () => {
-      aVendingMachine.makeChange();
-      expect(VendingMachine.returnCoin.calledOnce).to.be.true;
-    });
-
-    it('calls returnCoin with an array of coins, which are the least number of coins to make the change', () => {
-      aVendingMachine.insertCoin(coinSpecTests.quarter)
-        .insertCoin(coinSpecTests.quarter)
-        .insertCoin(coinSpecTests.quarter)
-        .insertCoin(coinSpecTests.quarter);
-
-      aVendingMachine.makeChange(50);
-
-      assert.calledWithMatch(VendingMachine.returnCoin, ['quarter', 'quarter']);
     });
   });
 });
