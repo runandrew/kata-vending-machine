@@ -40,7 +40,7 @@ class VendingMachine {
       this.updateBank('add', [coinValue]);
       this.displayText = VendingMachine.centToDollarStr(this.currentAmount);
     } else {
-      VendingMachine.returnCoin();
+      VendingMachine.returnCoin(['invalid']);
     }
     return this;
   }
@@ -120,7 +120,7 @@ class VendingMachine {
     return `$${dollars}.${centsRemainder > 9 ? centsRemainder : `0${centsRemainder}`}`;
   }
 
-  static returnCoin () {
+  static returnCoin (coinsToBeReturned) {
     // will physically return the coin
   }
 

@@ -125,8 +125,16 @@ describe('Vending Machine Class', () => {
 
   describe('insertCoin method', () => {
     let aVendingMachine;
+    let originalReturnCoin;
+
     beforeEach(() => {
       aVendingMachine = new VendingMachine();
+      originalReturnCoin = VendingMachine.returnCoin;
+      VendingMachine.returnCoin = spy(VendingMachine.returnCoin);
+    });
+    
+    afterEach(() => {
+      VendingMachine.returnCoin = originalReturnCoin;
     });
 
     it('is a function', () => {
@@ -147,6 +155,12 @@ describe('Vending Machine Class', () => {
       expect(aVendingMachine.displayText).to.equal('$0.05');
       aVendingMachine.insertCoin(coinSpecTests.dime);
       expect(aVendingMachine.displayText).to.equal('$0.15');
+    });
+
+    it('invokes returnCoin with "invalid" after inserting a penny', () => {
+      aVendingMachine.insertCoin(coinSpecTests.penny);
+      expect(VendingMachine.returnCoin.calledOnce).to.be.true;
+      assert.calledWithMatch(VendingMachine.returnCoin, ['invalid']);
     });
 
     it('updates the bank with the inserted coin', () => {
