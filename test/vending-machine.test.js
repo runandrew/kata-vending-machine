@@ -389,6 +389,11 @@ describe('Vending Machine Class', () => {
       aVendingMachine.selectReturnCoin();
       expect(aVendingMachine.checkDisplay()).to.equal('INSERT COIN');
     });
+
+    it('sets the currentAmount to 0 after dispensing', () => {
+      aVendingMachine.selectReturnCoin();
+      expect(aVendingMachine.currentAmount).to.equal(0);
+    });
   });
 });
 
