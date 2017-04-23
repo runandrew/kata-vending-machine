@@ -54,6 +54,10 @@ describe('Vending Machine Class', () => {
     it('has a bank property', () => {
       expect(typeof aVendingMachine.bank).to.equal('object');
     });
+
+    it('bank starts with no coins', () => {
+      expect(aVendingMachine.bank).to.eql({ '5': 0, '10': 0, '25': 0 });
+    });
   });
 
   describe('validateCoin static method', () => {
