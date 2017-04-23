@@ -370,6 +370,11 @@ describe('Vending Machine Class', () => {
       expect(VendingMachine.returnCoin.calledOnce).to.be.true;
       assert.calledWithMatch(VendingMachine.returnCoin, [25, 10, 5]);
     });
+
+    it('updates the bank with the correct amount of coins', () => {
+      aVendingMachine.selectReturnCoin();
+      expect(aVendingMachine.bank.toJS()).to.eql({ 25: 0, 10: 0, 5: 0 });
+    });
   });
 });
 
