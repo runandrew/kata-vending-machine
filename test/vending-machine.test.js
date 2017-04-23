@@ -265,6 +265,14 @@ describe('Vending Machine Class', () => {
       aVendingMachine.selectProduct('chips');
       assert.calledWithMatch(VendingMachine.returnCoin, [25, 25]);
     });
+
+    it('updates the bank after purchase with currentAmount greater than product price', () => {
+      aVendingMachine.insertCoin(coinSpecTests.quarter)
+        .insertCoin(coinSpecTests.quarter);
+      expect(aVendingMachine.bank.get(25)).to.equal(4);
+      aVendingMachine.selectProduct('chips');
+      expect(aVendingMachine.bank.get(25)).to.equal(2);
+    });
   });
 
   describe('makeChange method', () => {

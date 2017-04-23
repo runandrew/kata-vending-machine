@@ -63,6 +63,7 @@ class VendingMachine {
       const remainingAmount = this.currentAmount - productPrice;
       if (remainingAmount) {
         const coinsToMakeRemainder = this.makeChange(remainingAmount);
+        this.updateBank('subtract', coinsToMakeRemainder);
         VendingMachine.returnCoin(coinsToMakeRemainder);
       }
       this.currentAmount = 0;
