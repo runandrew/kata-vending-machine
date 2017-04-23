@@ -365,7 +365,7 @@ describe('Vending Machine Class', () => {
       expect(typeof aVendingMachine.selectReturnCoin).to.equal('function');
     });
 
-    it('invokes returnCoin with the correct amount of change with the least amount of coins', () => {
+    it('invokes returnCoin with the correct amount of change', () => {
       aVendingMachine.selectReturnCoin();
       expect(VendingMachine.returnCoin.calledOnce).to.be.true;
       assert.calledWithMatch(VendingMachine.returnCoin, [25, 10, 5]);
@@ -374,6 +374,15 @@ describe('Vending Machine Class', () => {
     it('updates the bank with the correct amount of coins', () => {
       aVendingMachine.selectReturnCoin();
       expect(aVendingMachine.bank.toJS()).to.eql({ 25: 0, 10: 0, 5: 0 });
+    });
+
+    it('updates the bank and invoke returnCoin with the correct and least amount of coins', () => {
+      aVendingMachine.currentAmount = 0;
+      aVendingMachine.insertCoin(coinSpecTests.nickel)
+        .insertCoin(coinSpecTests.nickel);
+      aVendingMachine.selectReturnCoin();
+      assert.calledWithMatch(VendingMachine.returnCoin, [10]);
+      expect(aVendingMachine.bank.toJS()).to.eql({ 25: 1, 10: 0, 5: 3 });
     });
   });
 });
