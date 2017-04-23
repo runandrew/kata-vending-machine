@@ -72,12 +72,14 @@ class VendingMachine {
 
   makeChange (requestedChange) {
     const changeTypes = this.bank.keySeq().toArray();
+    const memo = new Map();
 
     return findCoinsToMakeChange(requestedChange, this.bank, [], 0);
 
     function findCoinsToMakeChange (change, bank, coins, coinTypeStartIdx) {
       if (!change) return coins;
       if (change < 0 || change % 5) return [];
+      if (memo.has(change)) return memo.get(change);
 
       for (let coinTypeIndex = coinTypeStartIdx; coinTypeIndex < changeTypes.length; coinTypeIndex++) {
         if (bank.get(changeTypes[coinTypeIndex]) > 0) {
@@ -93,6 +95,8 @@ class VendingMachine {
           }
         }
       }
+
+      memo.set(change, []);
       return [];
     }
   }
