@@ -346,12 +346,29 @@ describe('Vending Machine Class', () => {
 
   describe('selectReturnCoin method', () => {
     let aVendingMachine;
+    let oldReturnCoin;
     beforeEach(() => {
       aVendingMachine = new VendingMachine();
+      oldReturnCoin = VendingMachine.returnCoin;
+      VendingMachine.returnCoin = spy(VendingMachine.returnCoin);
+
+      aVendingMachine.insertCoin(coinSpecTests.quarter)
+        .insertCoin(coinSpecTests.dime)
+        .insertCoin(coinSpecTests.nickel);
+    });
+
+    afterEach(() => {
+      VendingMachine.returnCoin = oldReturnCoin;
     });
     
     it('is a function', () => {
       expect(typeof aVendingMachine.selectReturnCoin).to.equal('function');
+    });
+
+    it('invokes returnCoin with the correct amount of change with the least amount of coins', () => {
+      aVendingMachine.selectReturnCoin();
+      expect(VendingMachine.returnCoin.calledOnce).to.be.true;
+      assert.calledWithMatch(VendingMachine.returnCoin, [25, 10, 5]);
     });
   });
 });

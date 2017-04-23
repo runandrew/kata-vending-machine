@@ -71,7 +71,7 @@ class VendingMachine {
   }
 
   selectReturnCoin () {
-
+    VendingMachine.returnCoin([25, 10, 5]);
   }
 
   makeChange (requestedChange) {
