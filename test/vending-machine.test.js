@@ -312,6 +312,14 @@ describe('Vending Machine Class', () => {
       aVendingMachine.updateBank('add', [25, 10, 5]);
       expect(aVendingMachine.bank.toJS()).to.eql({ 25: 2, 10: 2, 5: 1 });
     });
+
+    it('can subtract coins from the bank', () => {
+      aVendingMachine.bank = aVendingMachine.bank.set(25, 2).set(10, 3).set(5, 2);
+      aVendingMachine.updateBank('subtract', [25]);
+      expect(aVendingMachine.bank.get(25)).to.equal(1);
+      aVendingMachine.updateBank('subtract', [25, 10, 5]);
+      expect(aVendingMachine.bank.toJS()).to.eql({ 25: 0, 10: 2, 5: 1 });
+    });
   });
 });
 

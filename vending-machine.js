@@ -98,7 +98,9 @@ class VendingMachine {
 
   updateBank (operator, coins) {
     coins.forEach(coin => {
-      this.bank = this.bank.update(coin, val => val + 1);
+      this.bank = this.bank.update(coin, val => {
+        return operator === 'add' ? val + 1 : val - 1;
+      });
     });
   }
 
