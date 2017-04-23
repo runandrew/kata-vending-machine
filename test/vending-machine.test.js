@@ -309,6 +309,8 @@ describe('Vending Machine Class', () => {
       expect(aVendingMachine.bank.get(25)).to.equal(1);
       aVendingMachine.updateBank('add', [10]);
       expect(aVendingMachine.bank.get(10)).to.equal(1);
+      aVendingMachine.updateBank('add', [25, 10, 5]);
+      expect(aVendingMachine.bank.toJS()).to.eql({ 25: 2, 10: 2, 5: 1 });
     });
   });
 });
