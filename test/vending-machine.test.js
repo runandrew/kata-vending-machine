@@ -268,7 +268,14 @@ describe('Vending Machine Class', () => {
     });
 
     it('returns an array of the least amount of coins needed to make change', () => {
+      aVendingMachine.bank = aVendingMachine.bank.set(25, 2).set(10, 3).set(5, 0);
       expect(aVendingMachine.makeChange(50)).to.eql([25, 25]);
+      expect(aVendingMachine.makeChange(30)).to.eql([10, 10, 10]);
+      expect(aVendingMachine.makeChange(60)).to.eql([25, 25, 10]);
+      aVendingMachine.bank = aVendingMachine.bank.set(25, 2).set(10, 2).set(5, 2);
+      expect(aVendingMachine.makeChange(75)).to.eql([25, 25, 10, 10, 5]);
+      expect(aVendingMachine.makeChange(80)).to.eql([25, 25, 10, 10, 5, 5]);
+      expect(aVendingMachine.makeChange(85)).to.eql([]);
     });
   });
 });

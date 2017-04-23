@@ -67,9 +67,31 @@ class VendingMachine {
     }
   }
 
-  makeChange () {
+  makeChange (requestedChange) {
+    const changeTypes = this.bank.keySeq().toArray();
 
-    return [25, 25];
+    return findCoinsToMakeChange(requestedChange, this.bank, [], 0);
+
+    function findCoinsToMakeChange (change, bank, coins, coinTypeStartIdx) {
+      if (!change) return coins;
+      if (change < 0 || change % 5) return [];
+
+      for (let coinTypeIndex = coinTypeStartIdx; coinTypeIndex < changeTypes.length; coinTypeIndex++) {
+        if (bank.get(changeTypes[coinTypeIndex]) > 0) {
+          let possiblePath = findCoinsToMakeChange(
+            change - changeTypes[coinTypeIndex],
+            bank.update(changeTypes[coinTypeIndex], val => val - 1),
+            [...coins, changeTypes[coinTypeIndex]],
+            coinTypeIndex
+          );
+
+          if (possiblePath.length) {
+            return possiblePath;
+          }
+        }
+      }
+      return [];
+    }
   }
 
   static validateCoin ({weight, diameter}) {
