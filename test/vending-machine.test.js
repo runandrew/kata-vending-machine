@@ -343,5 +343,16 @@ describe('Vending Machine Class', () => {
       expect(aVendingMachine.bank.toJS()).to.eql({ 25: 0, 10: 2, 5: 1 });
     });
   });
+
+  describe('selectReturnCoin method', () => {
+    let aVendingMachine;
+    beforeEach(() => {
+      aVendingMachine = new VendingMachine();
+    });
+    
+    it('is a function', () => {
+      expect(typeof aVendingMachine.selectReturnCoin).to.equal('function');
+    });
+  });
 });
 

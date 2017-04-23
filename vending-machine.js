@@ -70,6 +70,10 @@ class VendingMachine {
     }
   }
 
+  selectReturnCoin () {
+
+  }
+
   makeChange (requestedChange) {
     const changeTypes = this.bank.keySeq().toArray();
     const memo = new Map();
