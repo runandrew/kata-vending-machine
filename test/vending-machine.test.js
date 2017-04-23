@@ -148,6 +148,11 @@ describe('Vending Machine Class', () => {
       aVendingMachine.insertCoin(coinSpecTests.dime);
       expect(aVendingMachine.displayText).to.equal('$0.15');
     });
+
+    it('updates the bank with the inserted coin', () => {
+      aVendingMachine.insertCoin(coinSpecTests.nickel);
+      expect(aVendingMachine.bank.get(5)).to.equal(1);
+    });
   });
 
   describe('checkDisplay method', () => {

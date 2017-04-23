@@ -37,6 +37,7 @@ class VendingMachine {
     const coinValue = VendingMachine.validateCoin(insertedCoin);
     if (coinValue) {
       this.currentAmount += coinValue;
+      this.bank = this.bank.set(5, 1);
       this.displayText = VendingMachine.centToDollarStr(this.currentAmount);
     } else {
       VendingMachine.returnCoin();
