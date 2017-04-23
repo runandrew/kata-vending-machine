@@ -56,7 +56,7 @@ describe('Vending Machine Class', () => {
     });
 
     it('bank starts with no coins', () => {
-      expect(aVendingMachine.bank).to.eql({ '5': 0, '10': 0, '25': 0 });
+      expect(aVendingMachine.bank.toJS()).to.eql({ '5': 0, '10': 0, '25': 0 });
     });
   });
 

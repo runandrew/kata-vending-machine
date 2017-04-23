@@ -1,5 +1,7 @@
 // Vending Machine
 
+const Immutable = require('immutable');
+
 const coinSpec = {
   nickel: {
     diameter: 21.21, // mm
@@ -28,11 +30,7 @@ class VendingMachine {
   constructor () {
     this.currentAmount = 0;
     this.displayText = 'INSERT COIN';
-    this.bank = {
-      '5': 0,
-      '10': 0,
-      '25': 0
-    };
+    this.bank = Immutable.Map().set(25, 0).set(10, 0).set(5, 0);
   }
 
   insertCoin (insertedCoin) {
