@@ -262,6 +262,10 @@ describe('Vending Machine Class', () => {
     it('is a function', () => {
       expect(typeof aVendingMachine.makeChange).to.equal('function');
     });
+
+    it('returns an array', () => {
+      expect(Array.isArray(aVendingMachine.makeChange())).to.be.true;
+    });
   });
 });
 

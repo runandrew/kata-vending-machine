@@ -70,6 +70,8 @@ class VendingMachine {
   }
 
   makeChange () {
+
+    return [];
   }
 
   static validateCoin ({weight, diameter}) {
