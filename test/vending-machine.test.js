@@ -257,10 +257,9 @@ describe('Vending Machine Class', () => {
     it('invokes returnCoin with an array of coins, which are the least number of coins to make the change', () => {
       aVendingMachine.insertCoin(coinSpecTests.quarter)
         .insertCoin(coinSpecTests.quarter);
-
       aVendingMachine.selectProduct('chips');
-
       assert.calledWithMatch(VendingMachine.returnCoin, [25, 25]);
+      expect(aVendingMachine.currentAmount).to.equal(0);
     });
   });
 
