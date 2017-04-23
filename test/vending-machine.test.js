@@ -266,6 +266,10 @@ describe('Vending Machine Class', () => {
     it('returns an array', () => {
       expect(Array.isArray(aVendingMachine.makeChange())).to.be.true;
     });
+
+    it('returns an array of the least amount of coins needed to make change', () => {
+      expect(aVendingMachine.makeChange(50)).to.eql([25, 25]);
+    });
   });
 });
 
