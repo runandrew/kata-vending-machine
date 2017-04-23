@@ -152,6 +152,13 @@ describe('Vending Machine Class', () => {
     it('updates the bank with the inserted coin', () => {
       aVendingMachine.insertCoin(coinSpecTests.nickel);
       expect(aVendingMachine.bank.get(5)).to.equal(1);
+      aVendingMachine.insertCoin(coinSpecTests.quarter);
+      expect(aVendingMachine.bank.get(25)).to.equal(1);
+      aVendingMachine.insertCoin(coinSpecTests.dime);
+      expect(aVendingMachine.bank.get(10)).to.equal(1);
+      aVendingMachine.insertCoin(coinSpecTests.quarter)
+        .insertCoin(coinSpecTests.quarter);
+      expect(aVendingMachine.bank.get(25)).to.equal(3);
     });
   });
 
