@@ -248,6 +248,11 @@ describe('Vending Machine Class', () => {
       expect(aVendingMachine.checkDisplay()).to.equal('INSERT COIN');
     });
     
+    it('does not invoke returnCoin with exact currentAmount', () => {
+      aVendingMachine.selectProduct('chips');
+      expect(VendingMachine.returnCoin.callCount).to.equal(0);
+    });
+
     it('invokes returnCoin when the product price is less than current amount', () => {
       aVendingMachine.insertCoin(coinSpecTests.quarter);
       aVendingMachine.selectProduct('chips');
@@ -259,7 +264,6 @@ describe('Vending Machine Class', () => {
         .insertCoin(coinSpecTests.quarter);
       aVendingMachine.selectProduct('chips');
       assert.calledWithMatch(VendingMachine.returnCoin, [25, 25]);
-      expect(aVendingMachine.currentAmount).to.equal(0);
     });
   });
 
