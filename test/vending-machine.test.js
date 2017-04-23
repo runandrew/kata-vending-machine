@@ -303,6 +303,11 @@ describe('Vending Machine Class', () => {
     it('is a function', () => {
       expect(typeof aVendingMachine.updateBank).to.equal('function');
     });
+
+    it('can add coins to the bank', () => {
+      aVendingMachine.updateBank('add', [25]);
+      expect(aVendingMachine.bank.get(25)).to.equal(1);
+    });
   });
 });
 

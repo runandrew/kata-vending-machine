@@ -97,7 +97,7 @@ class VendingMachine {
   }
 
   updateBank () {
-
+    this.bank = this.bank.set(25, 1);
   }
 
   static validateCoin ({weight, diameter}) {
