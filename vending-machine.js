@@ -96,8 +96,10 @@ class VendingMachine {
     }
   }
 
-  updateBank () {
-    this.bank = this.bank.set(25, 1);
+  updateBank (operator, coins) {
+    coins.forEach(coin => {
+      this.bank = this.bank.update(coin, val => val + 1);
+    });
   }
 
   static validateCoin ({weight, diameter}) {

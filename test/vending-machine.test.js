@@ -307,6 +307,8 @@ describe('Vending Machine Class', () => {
     it('can add coins to the bank', () => {
       aVendingMachine.updateBank('add', [25]);
       expect(aVendingMachine.bank.get(25)).to.equal(1);
+      aVendingMachine.updateBank('add', [10]);
+      expect(aVendingMachine.bank.get(10)).to.equal(1);
     });
   });
 });
