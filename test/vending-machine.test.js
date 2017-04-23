@@ -50,6 +50,10 @@ describe('Vending Machine Class', () => {
     it('displayText starts at "INSERT COIN"', () => {
       expect(aVendingMachine.displayText).to.equal('INSERT COIN');
     });
+
+    it('has a bank property', () => {
+      expect(typeof aVendingMachine.bank).to.equal('object');
+    });
   });
 
   describe('validateCoin static method', () => {
@@ -98,14 +102,14 @@ describe('Vending Machine Class', () => {
     });
 
     it('is called when an invalid coin is inserted', () => {
-      const originalReturnCoin = VendingMachine.returnCoin; // Save original function so that it can be reset later
+      const originalReturnCoin = VendingMachine.returnCoin;
       VendingMachine.returnCoin = spy(VendingMachine.returnCoin);
       let aVendingMachine = new VendingMachine();
       aVendingMachine.insertCoin(coinSpecTests.dime);
       expect(VendingMachine.returnCoin.called).to.be.false;
       aVendingMachine.insertCoin(coinSpecTests.penny);
       expect(VendingMachine.returnCoin.calledOnce).to.be.true;
-      VendingMachine.returnCoin = originalReturnCoin; // Reset to original function
+      VendingMachine.returnCoin = originalReturnCoin;
     });
   });
 

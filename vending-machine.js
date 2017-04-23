@@ -28,6 +28,11 @@ class VendingMachine {
   constructor () {
     this.currentAmount = 0;
     this.displayText = 'INSERT COIN';
+    this.bank = {
+      '5': 0,
+      '10': 0,
+      '25': 0
+    };
   }
 
   insertCoin (insertedCoin) {
