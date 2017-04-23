@@ -57,13 +57,13 @@ class VendingMachine {
       this.displayText = 'THANK YOU';
 
       const remainingAmount = this.currentAmount - productPrice;
-      if (remainingAmount) VendingMachine.returnCoin();
+      if (remainingAmount) this.makeChange();
       this.currentAmount = 0;
     }
   }
 
   makeChange () {
-    VendingMachine.returnCoin();
+    VendingMachine.returnCoin(['quarter', 'quarter']);
   }
 
   static validateCoin ({weight, diameter}) {

@@ -1,7 +1,7 @@
 // Tests for Vending Machine
 
 const { expect } = require('chai');
-const { spy } = require('sinon');
+const { spy, assert } = require('sinon');
 const { VendingMachine } = require('../vending-machine');
 
 const coinSpecTests = {
@@ -244,6 +244,17 @@ describe('Vending Machine Class', () => {
     it('invokes returnCoin', () => {
       aVendingMachine.makeChange();
       expect(VendingMachine.returnCoin.calledOnce).to.be.true;
+    });
+
+    it('calls returnCoin with an array of coins, which are the least number of coins to make the change', () => {
+      aVendingMachine.insertCoin(coinSpecTests.quarter)
+        .insertCoin(coinSpecTests.quarter)
+        .insertCoin(coinSpecTests.quarter)
+        .insertCoin(coinSpecTests.quarter);
+
+      aVendingMachine.makeChange(50);
+
+      assert.calledWithMatch(VendingMachine.returnCoin, ['quarter', 'quarter']);
     });
   });
 });
