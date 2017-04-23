@@ -293,5 +293,16 @@ describe('Vending Machine Class', () => {
       expect(aVendingMachine.makeChange(85)).to.eql([]);
     });
   });
+
+  describe('updateBank method', () => {
+    let aVendingMachine;
+    beforeEach(() => {
+      aVendingMachine = new VendingMachine();
+    });
+
+    it('is a function', () => {
+      expect(typeof aVendingMachine.updateBank).to.equal('function');
+    });
+  });
 });
 
