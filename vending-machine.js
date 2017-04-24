@@ -70,6 +70,14 @@ class VendingMachine {
     }
   }
 
+  selectReturnCoin () {
+    const coinsToMakeRemainder = this.makeChange(this.currentAmount);
+    this.updateBank('subtract', coinsToMakeRemainder);
+    VendingMachine.returnCoin(coinsToMakeRemainder);
+    this.displayText = 'INSERT COIN';
+    this.currentAmount = 0;
+  }
+
   makeChange (requestedChange) {
     const changeTypes = this.bank.keySeq().toArray();
     const memo = new Map();

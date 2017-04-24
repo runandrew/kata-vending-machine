@@ -343,5 +343,57 @@ describe('Vending Machine Class', () => {
       expect(aVendingMachine.bank.toJS()).to.eql({ 25: 0, 10: 2, 5: 1 });
     });
   });
+
+  describe('selectReturnCoin method', () => {
+    let aVendingMachine;
+    let oldReturnCoin;
+    beforeEach(() => {
+      aVendingMachine = new VendingMachine();
+      oldReturnCoin = VendingMachine.returnCoin;
+      VendingMachine.returnCoin = spy(VendingMachine.returnCoin);
+
+      aVendingMachine.insertCoin(coinSpecTests.quarter)
+        .insertCoin(coinSpecTests.dime)
+        .insertCoin(coinSpecTests.nickel);
+    });
+
+    afterEach(() => {
+      VendingMachine.returnCoin = oldReturnCoin;
+    });
+    
+    it('is a function', () => {
+      expect(typeof aVendingMachine.selectReturnCoin).to.equal('function');
+    });
+
+    it('invokes returnCoin with the correct amount of change', () => {
+      aVendingMachine.selectReturnCoin();
+      expect(VendingMachine.returnCoin.calledOnce).to.be.true;
+      assert.calledWithMatch(VendingMachine.returnCoin, [25, 10, 5]);
+    });
+
+    it('updates the bank with the correct amount of coins', () => {
+      aVendingMachine.selectReturnCoin();
+      expect(aVendingMachine.bank.toJS()).to.eql({ 25: 0, 10: 0, 5: 0 });
+    });
+
+    it('updates the bank and invoke returnCoin with the correct and least amount of coins', () => {
+      aVendingMachine.currentAmount = 0;
+      aVendingMachine.insertCoin(coinSpecTests.nickel)
+        .insertCoin(coinSpecTests.nickel);
+      aVendingMachine.selectReturnCoin();
+      assert.calledWithMatch(VendingMachine.returnCoin, [10]);
+      expect(aVendingMachine.bank.toJS()).to.eql({ 25: 1, 10: 0, 5: 3 });
+    });
+
+    it('displays "INSERT COIN" after returning the coins', () => {
+      aVendingMachine.selectReturnCoin();
+      expect(aVendingMachine.checkDisplay()).to.equal('INSERT COIN');
+    });
+
+    it('sets the currentAmount to 0 after dispensing', () => {
+      aVendingMachine.selectReturnCoin();
+      expect(aVendingMachine.currentAmount).to.equal(0);
+    });
+  });
 });
 
