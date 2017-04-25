@@ -423,6 +423,15 @@ describe('Vending Machine Class', () => {
       aVendingMachine.updateInventory('subtract', 'candy');
       expect(aVendingMachine.inventory.chips).to.equal(1);
     });
+
+    it('adds an item to the inventory', () => {
+      aVendingMachine.updateInventory('add', 'chips');
+      expect(aVendingMachine.inventory.chips).to.equal(4);
+      aVendingMachine.updateInventory('add', 'chips');
+      expect(aVendingMachine.inventory.chips).to.equal(5);
+      aVendingMachine.updateInventory('add', 'cola');
+      expect(aVendingMachine.inventory.chips).to.equal(5);
+    });
   });
 });
 

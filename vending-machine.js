@@ -125,7 +125,7 @@ class VendingMachine {
   }
 
   updateInventory (operator, product) {
-    this.inventory[product]--;
+    operator === 'add' ? this.inventory[product]++ : this.inventory[product]--;
   }
 
   static validateCoin ({weight, diameter}) {
