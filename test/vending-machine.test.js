@@ -211,6 +211,12 @@ describe('Vending Machine Class', () => {
 
       aVendingMachine.insertCoin(coinSpecTests.quarter)
         .insertCoin(coinSpecTests.quarter);
+
+      aVendingMachine.inventory = {
+        cola: 4,
+        chips: 3,
+        candy: 2
+      };
     });
 
     afterEach(() => {
@@ -290,6 +296,11 @@ describe('Vending Machine Class', () => {
       expect(aVendingMachine.bank.get(25)).to.equal(4);
       aVendingMachine.selectProduct('chips');
       expect(aVendingMachine.bank.get(25)).to.equal(2);
+    });
+
+    it('updates the inventory if there is enough money', () => {
+      aVendingMachine.selectProduct('chips');
+      expect(aVendingMachine.inventory.chips).to.equal(2);
     });
   });
 

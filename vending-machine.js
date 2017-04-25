@@ -60,6 +60,7 @@ class VendingMachine {
   }
 
   selectProduct (product) {
+    this.updateInventory('subtract', product);
     const productPrice = products[product];
     if (productPrice > this.currentAmount) {
       this.displayText = `PRICE: ${VendingMachine.centToDollarStr(productPrice)}`;
