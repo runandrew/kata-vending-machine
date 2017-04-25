@@ -26,11 +26,18 @@ const products = {
   candy: 65
 }; // cents
 
+const inventory = {
+  cola: 0,
+  chips: 0,
+  candy: 0
+};
+
 class VendingMachine {
   constructor () {
     this.currentAmount = 0;
     this.displayText = 'INSERT COIN';
     this.bank = Immutable.Map().set(25, 0).set(10, 0).set(5, 0);
+    this.inventory = { cola: 0, chips: 0, candy: 0 };
   }
 
   insertCoin (insertedCoin) {

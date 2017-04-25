@@ -58,6 +58,10 @@ describe('Vending Machine Class', () => {
     it('bank starts with no coins', () => {
       expect(aVendingMachine.bank.toJS()).to.eql({ '5': 0, '10': 0, '25': 0 });
     });
+
+    it('has an inventory', () => {
+      expect(aVendingMachine.inventory).to.eql({ cola: 0, chips: 0, candy: 0 });
+    });
   });
 
   describe('validateCoin static method', () => {
