@@ -26,11 +26,18 @@ const products = {
   candy: 65
 }; // cents
 
+const inventory = {
+  cola: 0,
+  chips: 0,
+  candy: 0
+};
+
 class VendingMachine {
   constructor () {
     this.currentAmount = 0;
     this.displayText = 'INSERT COIN';
     this.bank = Immutable.Map().set(25, 0).set(10, 0).set(5, 0);
+    this.inventory = { cola: 0, chips: 0, candy: 0 };
   }
 
   insertCoin (insertedCoin) {
@@ -47,17 +54,27 @@ class VendingMachine {
 
   checkDisplay () {
     let outputText = this.displayText;
-    if (outputText === 'THANK YOU') this.displayText = 'INSERT COIN';
-    else if (outputText.indexOf('PRICE') !== -1) this.displayText = this.currentAmount ? VendingMachine.centToDollarStr(this.currentAmount) : 'INSERT COIN';
+
+    if (outputText === 'THANK YOU') {
+      this.displayText = 'INSERT COIN';
+    } else if (outputText.indexOf('PRICE') !== -1 || outputText === 'SOLD OUT') {
+      this.displayText = this.currentAmount ? VendingMachine.centToDollarStr(this.currentAmount) : 'INSERT COIN';
+    }
     return outputText;
   }
 
   selectProduct (product) {
+    if (!this.inventory[product]) {
+      this.displayText = 'SOLD OUT';
+      return;
+    }
+
     const productPrice = products[product];
     if (productPrice > this.currentAmount) {
       this.displayText = `PRICE: ${VendingMachine.centToDollarStr(productPrice)}`;
     } else {
       VendingMachine.dispenseProduct(product);
+      this.updateInventory('subtract', product);
       this.displayText = 'THANK YOU';
 
       const remainingAmount = this.currentAmount - productPrice;
@@ -115,6 +132,10 @@ class VendingMachine {
         return operator === 'add' ? val + 1 : val - 1;
       });
     });
+  }
+
+  updateInventory (operator, product) {
+    operator === 'add' ? this.inventory[product]++ : this.inventory[product]--;
   }
 
   static validateCoin ({weight, diameter}) {

@@ -58,6 +58,10 @@ describe('Vending Machine Class', () => {
     it('bank starts with no coins', () => {
       expect(aVendingMachine.bank.toJS()).to.eql({ '5': 0, '10': 0, '25': 0 });
     });
+
+    it('has an inventory', () => {
+      expect(aVendingMachine.inventory).to.eql({ cola: 0, chips: 0, candy: 0 });
+    });
   });
 
   describe('validateCoin static method', () => {
@@ -207,6 +211,12 @@ describe('Vending Machine Class', () => {
 
       aVendingMachine.insertCoin(coinSpecTests.quarter)
         .insertCoin(coinSpecTests.quarter);
+
+      aVendingMachine.inventory = {
+        cola: 4,
+        chips: 3,
+        candy: 1
+      };
     });
 
     afterEach(() => {
@@ -286,6 +296,30 @@ describe('Vending Machine Class', () => {
       expect(aVendingMachine.bank.get(25)).to.equal(4);
       aVendingMachine.selectProduct('chips');
       expect(aVendingMachine.bank.get(25)).to.equal(2);
+    });
+
+    it('updates the inventory if there is enough money', () => {
+      aVendingMachine.selectProduct('chips');
+      expect(aVendingMachine.inventory.chips).to.equal(2);
+    });
+
+    it('does not update the inventory when not enough money', () => {
+      aVendingMachine.selectProduct('cola');
+      expect(aVendingMachine.inventory.cola).to.equal(4);
+    });
+
+    it('if the item is sold out, it will display "SOLD OUT" and then the money in the machine or "INSERT COIN"', () => {
+      aVendingMachine.inventory.candy = 0;
+      aVendingMachine.insertCoin(coinSpecTests.quarter);
+      aVendingMachine.selectProduct('candy');
+      expect(aVendingMachine.checkDisplay()).to.equal('SOLD OUT');
+      expect(aVendingMachine.checkDisplay()).to.equal('$0.75');
+
+      aVendingMachine.currentAmount = 0;
+      aVendingMachine.inventory.chips = 0;
+      aVendingMachine.selectProduct('chips');
+      expect(aVendingMachine.checkDisplay()).to.equal('SOLD OUT');
+      expect(aVendingMachine.checkDisplay()).to.equal('INSERT COIN');
     });
   });
 
@@ -393,6 +427,40 @@ describe('Vending Machine Class', () => {
     it('sets the currentAmount to 0 after dispensing', () => {
       aVendingMachine.selectReturnCoin();
       expect(aVendingMachine.currentAmount).to.equal(0);
+    });
+  });
+
+  describe('updateInventory method', () => {
+    let aVendingMachine;
+    beforeEach(() => {
+      aVendingMachine = new VendingMachine();
+      aVendingMachine.inventory = {
+        cola: 4,
+        chips: 3,
+        candy: 2
+      };
+    });
+
+    it('is a function', () => {
+      expect(typeof aVendingMachine.updateInventory).to.equal('function');
+    });
+
+    it('subtracts an item from the inventory', () => {
+      aVendingMachine.updateInventory('subtract', 'chips');
+      expect(aVendingMachine.inventory.chips).to.equal(2);
+      aVendingMachine.updateInventory('subtract', 'chips');
+      expect(aVendingMachine.inventory.chips).to.equal(1);
+      aVendingMachine.updateInventory('subtract', 'candy');
+      expect(aVendingMachine.inventory.chips).to.equal(1);
+    });
+
+    it('adds an item to the inventory', () => {
+      aVendingMachine.updateInventory('add', 'chips');
+      expect(aVendingMachine.inventory.chips).to.equal(4);
+      aVendingMachine.updateInventory('add', 'chips');
+      expect(aVendingMachine.inventory.chips).to.equal(5);
+      aVendingMachine.updateInventory('add', 'cola');
+      expect(aVendingMachine.inventory.chips).to.equal(5);
     });
   });
 });
