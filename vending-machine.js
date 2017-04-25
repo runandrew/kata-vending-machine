@@ -124,6 +124,10 @@ class VendingMachine {
     });
   }
 
+  updateInventory () {
+
+  }
+
   static validateCoin ({weight, diameter}) {
     for (let coin in coinSpec) {
       if (weight === coinSpec[coin].weight && diameter === coinSpec[coin].diameter) {

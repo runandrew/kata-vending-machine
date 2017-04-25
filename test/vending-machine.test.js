@@ -399,5 +399,16 @@ describe('Vending Machine Class', () => {
       expect(aVendingMachine.currentAmount).to.equal(0);
     });
   });
+
+  describe('updateInventory method', () => {
+    let aVendingMachine;
+    beforeEach(() => {
+      aVendingMachine = new VendingMachine();
+    });
+
+    it('is a function', () => {
+      expect(typeof aVendingMachine.updateInventory).to.equal('function');
+    });
+  });
 });
 
