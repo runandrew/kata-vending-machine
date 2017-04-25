@@ -404,10 +404,24 @@ describe('Vending Machine Class', () => {
     let aVendingMachine;
     beforeEach(() => {
       aVendingMachine = new VendingMachine();
+      aVendingMachine.inventory = {
+        cola: 4,
+        chips: 3,
+        candy: 2
+      };
     });
 
     it('is a function', () => {
       expect(typeof aVendingMachine.updateInventory).to.equal('function');
+    });
+
+    it('subtracts an item from the inventory', () => {
+      aVendingMachine.updateInventory('subtract', 'chips');
+      expect(aVendingMachine.inventory.chips).to.equal(2);
+      aVendingMachine.updateInventory('subtract', 'chips');
+      expect(aVendingMachine.inventory.chips).to.equal(1);
+      aVendingMachine.updateInventory('subtract', 'candy');
+      expect(aVendingMachine.inventory.chips).to.equal(1);
     });
   });
 });

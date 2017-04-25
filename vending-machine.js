@@ -124,8 +124,8 @@ class VendingMachine {
     });
   }
 
-  updateInventory () {
-
+  updateInventory (operator, product) {
+    this.inventory[product]--;
   }
 
   static validateCoin ({weight, diameter}) {
