@@ -215,7 +215,7 @@ describe('Vending Machine Class', () => {
       aVendingMachine.inventory = {
         cola: 4,
         chips: 3,
-        candy: 2
+        candy: 1
       };
     });
 
@@ -301,6 +301,25 @@ describe('Vending Machine Class', () => {
     it('updates the inventory if there is enough money', () => {
       aVendingMachine.selectProduct('chips');
       expect(aVendingMachine.inventory.chips).to.equal(2);
+    });
+
+    it('does not update the inventory when not enough money', () => {
+      aVendingMachine.selectProduct('cola');
+      expect(aVendingMachine.inventory.cola).to.equal(4);
+    });
+
+    it('if the item is sold out, it will display "SOLD OUT" and then the money in the machine or "INSERT COIN"', () => {
+      aVendingMachine.inventory.candy = 0;
+      aVendingMachine.insertCoin(coinSpecTests.quarter);
+      aVendingMachine.selectProduct('candy');
+      expect(aVendingMachine.checkDisplay()).to.equal('SOLD OUT');
+      expect(aVendingMachine.checkDisplay()).to.equal('$0.75');
+
+      aVendingMachine.currentAmount = 0;
+      aVendingMachine.inventory.chips = 0;
+      aVendingMachine.selectProduct('chips');
+      expect(aVendingMachine.checkDisplay()).to.equal('SOLD OUT');
+      expect(aVendingMachine.checkDisplay()).to.equal('INSERT COIN');
     });
   });
 
