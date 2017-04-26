@@ -74,8 +74,8 @@ class VendingMachine {
 
   // makeChange: finds the least amount of coins to return given the bank state and request change amount
   makeChange (requestedChange) {
-    const changeTypes = this.bank.keySeq().toArray(); // define the denominations
-    const memo = new Map(); // establish memo to prevent duplicated calculations
+    const changeTypes = this.bank.keySeq().toArray();                 // define the denominations
+    const memo = new Map();                                           // establish memo to prevent duplicated calculations
 
     return findCoinsToMakeChange(requestedChange, this.bank, [], 0);
 
@@ -99,7 +99,7 @@ class VendingMachine {
         }
       }
 
-      memo.set(change, []); // save paths that aren't feasible
+      memo.set(change, []);                                           // save paths that aren't feasible
       return [];
     }
   }
