@@ -11,6 +11,7 @@ class VendingMachine {
     this.inventory = { cola: 0, chips: 0, candy: 0 };
   }
 
+  // insertCoin: validates the coins, and adjusts the display and bank accordingly
   insertCoin (insertedCoin) {
     const coinValue = VendingMachine.validateCoin(insertedCoin);
     if (coinValue) {
@@ -23,6 +24,7 @@ class VendingMachine {
     return this;
   }
 
+  // checkDisplay: return the current output display based on machine state
   checkDisplay () {
     let outputText = this.displayText;
 
@@ -34,12 +36,15 @@ class VendingMachine {
     return outputText;
   }
 
+  // selectProduct: dispenses products and updates the bank and inventory
   selectProduct (product) {
+    // Product is sold out
     if (!this.inventory[product]) {
       this.displayText = 'SOLD OUT';
       return;
     }
 
+    // Product is not sold out. Checks if there is enough money, if so, vend and return change if necessary
     const productPrice = products[product];
     if (productPrice > this.currentAmount) {
       this.displayText = `PRICE: ${VendingMachine.centToDollarStr(productPrice)}`;
@@ -58,6 +63,7 @@ class VendingMachine {
     }
   }
 
+  // selectReturnCoin: returns the inserted coins to the user with the least amount of coins
   selectReturnCoin () {
     const coinsToMakeRemainder = this.makeChange(this.currentAmount);
     this.updateBank('subtract', coinsToMakeRemainder);
@@ -66,16 +72,17 @@ class VendingMachine {
     this.currentAmount = 0;
   }
 
+  // makeChange: finds the least amount of coins to return given the bank state and request change amount
   makeChange (requestedChange) {
-    const changeTypes = this.bank.keySeq().toArray();
-    const memo = new Map();
+    const changeTypes = this.bank.keySeq().toArray(); // define the denominations
+    const memo = new Map(); // establish memo to prevent duplicated calculations
 
     return findCoinsToMakeChange(requestedChange, this.bank, [], 0);
 
     function findCoinsToMakeChange (change, bank, coins, coinTypeStartIdx) {
-      if (!change) return coins;
-      if (change < 0 || change % 5) return [];
-      if (memo.has(change)) return memo.get(change);
+      if (!change) return coins; // base case: remaining change of zero, return the coins so far
+      if (change < 0 || change % 5) return []; // if the previous coin is over the desired amount, or if it isn't divisible by 5 (specific to this set of coins), then return with no path
+      if (memo.has(change)) return memo.get(change); // check if the calculation has been completed before
 
       for (let coinTypeIndex = coinTypeStartIdx; coinTypeIndex < changeTypes.length; coinTypeIndex++) {
         if (bank.get(changeTypes[coinTypeIndex]) > 0) {
