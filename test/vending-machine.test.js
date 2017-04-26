@@ -3,25 +3,7 @@
 const { expect } = require('chai');
 const { spy, assert } = require('sinon');
 const { VendingMachine } = require('../vending-machine');
-
-const coinSpecTests = {
-  penny: {
-    diameter: 19.05, // mm
-    weight: 2.500 // g
-  },
-  nickel: {
-    diameter: 21.21, // mm
-    weight: 5.000 // g
-  },
-  dime: {
-    diameter: 17.91, // mm
-    weight: 2.268 // g
-  },
-  quarter: {
-    diameter: 24.26, // mm
-    weight: 5.670 // g
-  }
-};
+const { coinSpecTests } = require('./constants.js');
 
 describe('Vending Machine Class', () => {
   it('is a function', () => {

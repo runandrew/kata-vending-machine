@@ -1,7 +1,7 @@
 // Vending Machine
 
 const Immutable = require('immutable');
-const { coinSpec, products, inventory } = require('./constants');
+const { coinSpec, products } = require('./constants');
 
 class VendingMachine {
   constructor () {
@@ -80,17 +80,17 @@ class VendingMachine {
     return findCoinsToMakeChange(requestedChange, this.bank, [], 0);
 
     function findCoinsToMakeChange (change, bank, coins, coinTypeStartIdx) {
-      if (!change) return coins; // base case: remaining change of zero, return the coins so far
-      if (change < 0 || change % 5) return []; // if the previous coin is over the desired amount, or if it isn't divisible by 5 (specific to this set of coins), then return with no path
-      if (memo.has(change)) return memo.get(change); // check if the calculation has been completed before
+      if (!change) return coins;                                      // base case: remaining change of zero, return the coins so far
+      if (change < 0 || change % 5) return [];                        // if the previous coin is over the desired amount, or if it isn't divisible by 5 (specific to this set of coins), then return with no path
+      if (memo.has(change)) return memo.get(change);                  // check if the calculation has been completed before
 
       for (let coinTypeIndex = coinTypeStartIdx; coinTypeIndex < changeTypes.length; coinTypeIndex++) {
-        if (bank.get(changeTypes[coinTypeIndex]) > 0) {
+        if (bank.get(changeTypes[coinTypeIndex]) > 0) {               // if there are coins left of this denomination
           let possiblePath = findCoinsToMakeChange(
-            change - changeTypes[coinTypeIndex],
+            change - changeTypes[coinTypeIndex],                      // find the change for the remainder after the current coin
             bank.update(changeTypes[coinTypeIndex], val => val - 1),
-            [...coins, changeTypes[coinTypeIndex]],
-            coinTypeIndex
+            [...coins, changeTypes[coinTypeIndex]],                   // keep track of the coins used
+            coinTypeIndex                                             // prevent the use of prior coins
           );
 
           if (possiblePath.length) {
@@ -99,11 +99,12 @@ class VendingMachine {
         }
       }
 
-      memo.set(change, []);
+      memo.set(change, []); // save paths that aren't feasible
       return [];
     }
   }
 
+  // updateBank: allows the addition or subtraction of coins in the bank
   updateBank (operator, coins) {
     coins.forEach(coin => {
       this.bank = this.bank.update(coin, val => {
@@ -112,10 +113,12 @@ class VendingMachine {
     });
   }
 
+  // updateInventory: allows the addition or subtraction of items in the machine
   updateInventory (operator, product) {
     operator === 'add' ? this.inventory[product]++ : this.inventory[product]--;
   }
 
+  // validateCoin: takes in physical properties of a coin and returns a value for a valid coin
   static validateCoin ({weight, diameter}) {
     for (let coin in coinSpec) {
       if (weight === coinSpec[coin].weight && diameter === coinSpec[coin].diameter) {
@@ -125,16 +128,19 @@ class VendingMachine {
     return 0;
   }
 
+  // centToDollarStr: converts a cents amount to a formatted dollar string
   static centToDollarStr (cents) {
     const dollars = Math.floor(cents / 100);
     const centsRemainder = cents % 100;
     return `$${dollars}.${centsRemainder > 9 ? centsRemainder : `0${centsRemainder}`}`;
   }
 
+  // returnCoin: represents passing the coin to the coin return
   static returnCoin (coinsToBeReturned) {
     // will physically return the coin
   }
 
+  // dispenseProduct: represents dispensing the product for the customer to retrieve
   static dispenseProduct (product) {
     // will physically dispense the product
   }

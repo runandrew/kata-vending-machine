@@ -24,14 +24,7 @@ const products = {
   candy: 65
 }; // cents
 
-const inventory = {
-  cola: 0,
-  chips: 0,
-  candy: 0
-};
-
 module.exports = {
   coinSpec,
-  products,
-  inventory
+  products
 };
